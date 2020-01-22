@@ -9,7 +9,7 @@ scope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/aut
 creds = ServiceAccountCredentials.from_json_keyfile_name("creds.json", scope) # JSON file containing Google API credentials 
 client = gspread.authorize(creds)
 
-sheet = client.open("Ban Log").sheet1
+SHEET = client.open("YOUR SHEET NAME HERE").sheet1 # Edit your sheet name
 
 reddit = praw.Reddit(
     client_id = config.client_id,
@@ -25,7 +25,7 @@ for log in reddit.subreddit('mod').mod.log(limit = 2000): # Loop through 2000 mo
         reddit_day = time.strftime('%d', time.localtime(log.created_utc))
 
         if yesterday == reddit_day:
-            sheet.insert_row((str(log.target_author), str(log.details), str(log.description), str(log.mod), time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(log.created_utc))), 2) # Insert a new row onto our Google Sheet at row 2, pushing the other rows down
+            SHEET.insert_row((str(log.target_author), str(log.details), str(log.description), str(log.mod), time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(log.created_utc))), 2) # Insert a new row onto our Google Sheet at row 2, pushing the other rows down
             time.sleep(1) # Wait 1 second before proceeding, Google tends to rate limit causing the script to crash
 
 
