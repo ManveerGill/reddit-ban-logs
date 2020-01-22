@@ -9,7 +9,7 @@ scope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/aut
 creds = ServiceAccountCredentials.from_json_keyfile_name("creds.json", scope) # JSON file containing Google API credentials 
 client = gspread.authorize(creds)
 
-SHEET = client.open("YOUR SHEET NAME HERE").sheet1 # Edit your sheet name
+SHEET = client.open("YOUR SHEET NAME HERE").sheet1 # Edit your sheets name
 
 reddit = praw.Reddit(
     client_id = config.client_id,
